@@ -4,6 +4,6 @@
     {
         void Serialize();
         void SetPosition(int x, int y);
-        void SetSize(int x, int y);
+        void SetSize(int width, int height);
     }
 }

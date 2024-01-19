@@ -1,18 +1,15 @@
 ﻿namespace RoomLabelMakerApp.Models;
 
-public partial class LogoObjectModel : IContentObject
+public partial class LogoObjectModel : ObjectBase, IContentObject
 {
-    public void Serialize()
+    public LogoObjectModel() : base(defaultX, defaultY, defaultWidth, defaultHeight)
     {
-        throw new NotImplementedException();
+        ImageData = defaultpicture;
+        throw new NotImplementedException("Logo: dodac jako default obrazek UJ");
+        //dodac jako default obrazek UJ
     }
 
-    public void SetPosition(int x, int y)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SetSize(int x, int y)
+    public override void Serialize()
     {
         throw new NotImplementedException();
     }

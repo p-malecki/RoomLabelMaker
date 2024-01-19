@@ -1,18 +1,13 @@
 ﻿namespace RoomLabelMakerApp.Models;
 
-public partial class RoomNumberObjectModel : IContentObject
+public partial class RoomNumberObjectModel : ObjectBase, IContentObject
 {
-    public void Serialize()
+    public RoomNumberObjectModel() : base (defaultX, defaultY, defaultWidth, defaultHeight)
     {
-        throw new NotImplementedException();
+        Text = defaultText;
     }
 
-    public void SetPosition(int x, int y)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SetSize(int x, int y)
+    public override void Serialize()
     {
         throw new NotImplementedException();
     }
