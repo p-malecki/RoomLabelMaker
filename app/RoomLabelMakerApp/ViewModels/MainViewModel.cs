@@ -26,7 +26,7 @@ public class MainViewModel : INotifyPropertyChanged
         set
         {
             _exampleProperty = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(ExampleProperty));
         }
     }
 
