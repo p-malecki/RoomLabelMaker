@@ -5,10 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RoomLabelMakerApp"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="Room label maker" Height="500" Width="850">
     <Grid>
 
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ExampleCommand}" CommandParameter="TEST VALUE" Height="117" Width="224"/>
+        <!-- Lewy panel -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <TextBox x:Name="txtRoomNumber1" Grid.Column="1" Grid.Row="1" Margin="91,0,10,0" Grid.ColumnSpan="5"/>
+            <TextBox Grid.Row="2" Margin="46,44,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+            <Image Margin="10,24,60,50" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+
+        </Grid>
+
+        <!-- Prawy panel -->
+        <Grid Grid.Column="1" Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Pole tekstowe zamiast przycisku 1 -->
+
+            <TextBlock Grid.Column="1" Text="Room number:" Margin="5,0,15,0" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <TextBox
+                    Grid.Row="1"
+                    VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto"
+                    AcceptsReturn="True" TextWrapping="Wrap" 
+                FontSize="14" FontFamily="Verdana" FontWeight="Bold"
+                    x:Name="txtRoomNumber" Height="30" Margin="5,24,20,10" Grid.Column="1"/>
+
+
+            <!-- Pole tekstowe zamiast przycisku 2 -->
+
+            <TextBlock Text="Names:" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.671,5.195" Margin="5,10,15,54" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <TextBox  Grid.Row="2" 
+                      AcceptsReturn="True" TextWrapping="Wrap" 
+                      x:Name="txtNames" Grid.Column="1" 
+                      Margin="5,32,20,10" 
+                      Grid.RowSpan="2"
+                      FontSize="14" FontFamily="Verdana" FontWeight="Bold"/>
+
+
+            <Button x:Name="btnLoadImage" Content="Load image" Margin="5,5,5,5" Grid.Row="4" Grid.Column="1"/>
+            <Button x:Name="btnSave" Content="Save" Margin="5" Grid.Row="5" Grid.Column="1"/>
+            <Button x:Name="btnPrint" Content="Print" Margin="5" Grid.Row="6" Grid.Column="1"/>
+        </Grid>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="_Open" />
+                <MenuItem Header="_Save" />
+                <MenuItem Header="_Save as" />
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>

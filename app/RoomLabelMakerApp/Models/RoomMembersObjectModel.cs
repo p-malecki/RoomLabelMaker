@@ -7,7 +7,7 @@ public partial class RoomMembersObjectModel
     static int defaultWidth = 0;
     static int defaultHeight = 0;
 
-    static string[] defaultText = ["Michał Mnich"];
+    static string[] defaultText = { "Michał Mnich" };
     static string defaultFontStyle = "Italic";
     static string defaultForegroundColor = "Black";
     static double defaultFontSize = 120;
