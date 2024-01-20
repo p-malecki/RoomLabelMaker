@@ -5,12 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RoomLabelMakerApp"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="Room label maker" Height="500" Width="850">
     <Grid>
+        <!-- Lewy panel -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
-<<<<<<< Updated upstream
-        <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ExampleCommand}" CommandParameter="TEST VALUE" Height="117" Width="224"/>
-=======
         <Grid Grid.Column="0" Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
 
@@ -32,10 +39,44 @@
                 <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
-            <TextBox x:Name="txtRoomNumber1" Grid.Column="1" Margin="91,70,10,0" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
+            <TextBox x:Name="txtRoomNumber1" Grid.Column="1" Grid.Row="1" Margin="91,35,10,35" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
             <TextBox Grid.Row="2" Margin="91,71,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
         </Grid>
->>>>>>> Stashed changes
 
+        <!-- Prawy panel -->
+        <Grid Grid.Column="1" Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Pole tekstowe zamiast przycisku 1 -->
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
+                <TextBlock Text="Room number:"/>
+                <TextBox
+                    VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto"
+                    AcceptsReturn="True" TextWrapping="Wrap" 
+                    x:Name="txtRoomNumber" Width="200" Height="30"/>
+            </StackPanel>
+
+            <!-- Pole tekstowe zamiast przycisku 2 -->
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                <TextBlock Text="Names:"/>
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtNames" Width="200" Height="200"/>
+            </StackPanel>
+
+            <Button x:Name="btnLoadImage" Content="Load image" Margin="5" Grid.Row="2" Grid.Column="1"/>
+            <Button x:Name="btnSave" Content="Save" Margin="5" Grid.Row="3" Grid.Column="1"/>
+            <Button x:Name="btnPrint" Content="Print" Margin="5" Grid.Row="4" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>
