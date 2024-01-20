@@ -8,7 +8,34 @@
         Title="MainView" Height="450" Width="800">
     <Grid>
 
+<<<<<<< Updated upstream
         <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ExampleCommand}" CommandParameter="TEST VALUE" Height="117" Width="224"/>
+=======
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <TextBox x:Name="txtRoomNumber1" Grid.Column="1" Margin="91,70,10,0" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
+            <TextBox Grid.Row="2" Margin="91,71,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+        </Grid>
+>>>>>>> Stashed changes
 
     </Grid>
 </Window>
