@@ -8,5 +8,5 @@ public partial class LogoObjectModel
     static int defaultHeight = 0;
     static byte[] defaultpicture;
 
-    public byte[] ImageData;
+    public byte[] ImageData { get; set; }
 }

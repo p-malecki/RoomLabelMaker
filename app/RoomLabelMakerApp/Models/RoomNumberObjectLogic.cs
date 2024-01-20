@@ -1,14 +1,25 @@
-﻿namespace RoomLabelMakerApp.Models;
+﻿using Newtonsoft.Json;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
+
+namespace RoomLabelMakerApp.Models;
 
 public partial class RoomNumberObjectModel : ObjectBase, IContentObject
 {
     public RoomNumberObjectModel() : base (defaultX, defaultY, defaultWidth, defaultHeight)
     {
+        FontStyle = defaultFontStyle;
+        FontSize = defaultFontSize;
+        ForegroundColor = defaultForegroundColor;
         Text = defaultText;
     }
 
-    public override void Serialize()
+    public override string Serialize()
     {
-        throw new NotImplementedException();
+        var properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+        var propertyValues = properties.ToDictionary(prop => prop.Name, prop => prop.GetValue(this));
+
+        return JsonConvert.SerializeObject(new { RoomNumberObjectModel = propertyValues });
     }
 }

@@ -15,10 +15,34 @@ public abstract class ObjectBase : IContentObject
         _height = height;
     }
 
-    public int x { get; }
-    public int y { get; }
-    public int Width { get; }
-    public int Height { get; }
+    /// <summary>
+    /// Zrobione żeby deserializacja dziala, jezeli bedziemy chcieli zeby byly one tylko read only trzeba
+    /// zmienic w kazdym z objektow spsob zapisu _x, _y 
+    /// </summary>
+
+    public int x
+    {
+        get => _x;
+        set => _x = value;
+    }
+
+    public int y
+    {
+        get => _y;
+        set => _y = value;
+    }
+
+    public int Width
+    {
+        get => _width;
+        set => _width = value;
+    }
+
+    public int Height
+    {
+        get => _height;
+        set => _height = value;
+    }
 
     public void SetPosition(int x, int y)
     {
@@ -32,6 +56,6 @@ public abstract class ObjectBase : IContentObject
         this._height = height;
     }
 
-    abstract public void Serialize();
+    abstract public string Serialize();
 }
 

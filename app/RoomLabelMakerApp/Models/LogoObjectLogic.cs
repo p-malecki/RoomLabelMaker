@@ -1,4 +1,7 @@
-﻿namespace RoomLabelMakerApp.Models;
+﻿using Newtonsoft.Json;
+using System.Reflection;
+
+namespace RoomLabelMakerApp.Models;
 
 public partial class LogoObjectModel : ObjectBase, IContentObject
 {
@@ -9,8 +12,12 @@ public partial class LogoObjectModel : ObjectBase, IContentObject
         //dodac jako default obrazek UJ
     }
 
-    public override void Serialize()
+    public override string Serialize()
     {
-        throw new NotImplementedException();
+        var properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+        var propertyValues = properties.ToDictionary(prop => prop.Name, prop => prop.GetValue(this));
+
+        return JsonConvert.SerializeObject(new { LogoObjectModel = propertyValues });
     }
 }
