@@ -7,9 +7,9 @@ public partial class RoomMembersObjectModel : ObjectBase, IContentObject
 {
     public RoomMembersObjectModel() : base(defaultX, defaultY, defaultWidth, defaultHeight)
     {
-        FontStyle = defaultFontStyle;
-        FontSize = defaultFontSize;
-        ForegroundColor = defaultForegroundColor;
+        // FontStyle = defaultFontStyle;
+        // FontSize = defaultFontSize;
+        // ForegroundColor = defaultForegroundColor;
         Text = defaultText;
     }
     public override string Serialize()

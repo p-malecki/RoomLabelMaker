@@ -1,4 +1,6 @@
-﻿namespace RoomLabelMakerApp.Models;
+﻿using System.Windows.Media.Imaging;
+
+namespace RoomLabelMakerApp.Models;
 
 public partial class LogoObjectModel
 {
@@ -6,7 +8,7 @@ public partial class LogoObjectModel
     static int defaultY = 0;
     static int defaultWidth = 0;
     static int defaultHeight = 0;
-    static byte[] defaultpicture;
+    static string defaultpicture;
 
-    public byte[] ImageData { get; set; }
+    public string ImageData { get; set; }
 }

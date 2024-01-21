@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Commands\" />
+    <Folder Include="UJ-logos\" />
   </ItemGroup>
 
   <ItemGroup>
