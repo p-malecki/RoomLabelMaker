@@ -2,6 +2,7 @@
 using RoomLabelMakerApp.Models;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace RoomLabelMakerApp
 {
@@ -40,6 +41,11 @@ namespace RoomLabelMakerApp
             image_data = path;
         }
 
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument flowDocument = FindName("flowDoc") as FlowDocument;
+            DoorLabelModel.Print(flowDocument);
+        }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             doorlabelmodel.set_Variables(room_number,room_names,image_data);
