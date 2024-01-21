@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
-
+﻿using System.Windows.Media.Imaging;
+using Newtonsoft.Json;
+using System.IO;
+using Microsoft.Win32;
 namespace RoomLabelMakerApp.Models;
 
 public class DoorLabelModel
@@ -33,11 +35,51 @@ public class DoorLabelModel
             return JsonConvert.SerializeObject(new { objects = objectsJson });
         }
     }
+    
 
     public class RootObjectDeserialize
     {
         public List<Dictionary<string, object>> Objects { get; set; }
 
+    }
+
+    public void set_Variables(string room_number, string room_members, string logo)
+    {
+        RoomNumber.Text = room_number;
+        RoomMembers.Text = room_members;
+        Logo.ImageData = logo;
+    }
+
+    public void save_json_to_file(string json)
+    {
+        SaveFileDialog saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+        saveFileDialog.DefaultExt = "json";
+        saveFileDialog.Title = "Save JSON File";
+        
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            string filePath = saveFileDialog.FileName;
+            File.WriteAllText(filePath, json);
+        }
+    }
+    
+    public string load_json_from_file()
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "JSON Files (*.json)|*.json";
+        openFileDialog.Title = "Select JSON File to Load";
+        
+        if (openFileDialog.ShowDialog() == true)
+        {
+            string filePath = openFileDialog.FileName;
+            string jsonContent = File.ReadAllText(filePath);
+            return jsonContent;
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public string Serialize()

@@ -88,15 +88,13 @@
 
 
             <Button x:Name="btnLoadImage" Content="Load image" Margin="5,5,5,5" Grid.Row="4" Grid.Column="1" Click="btnLoadImage_Click" />
-            <Button x:Name="btnSave" Content="Save" Margin="5" Grid.Row="5" Grid.Column="1"/>
+            <Button x:Name="btnSave" Content="Save" Margin="5" Grid.Row="5" Grid.Column="1" Click="btnSave_Click"/>
             <Button x:Name="btnPrint" Content="Print" Margin="5" Grid.Row="6" Grid.Column="1"/>
         </Grid>
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="File">
-                <MenuItem Header="_New" />
-                <MenuItem Header="_Open" />
-                <MenuItem Header="_Save" />
-                <MenuItem Header="_Save as" />
+                <MenuItem Header="_Open" Click="btnOpen_Click"/>
+                <MenuItem Header="_Save" Click="btnSave_Click" />
             </MenuItem>
         </Menu>
 

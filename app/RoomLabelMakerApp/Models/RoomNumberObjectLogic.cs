@@ -8,9 +8,9 @@ public partial class RoomNumberObjectModel : ObjectBase, IContentObject
 {
     public RoomNumberObjectModel() : base (defaultX, defaultY, defaultWidth, defaultHeight)
     {
-        FontStyle = defaultFontStyle;
-        FontSize = defaultFontSize;
-        ForegroundColor = defaultForegroundColor;
+        // FontStyle = defaultFontStyle;
+        // FontSize = defaultFontSize;
+        // ForegroundColor = defaultForegroundColor;
         Text = defaultText;
     }
 
