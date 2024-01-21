@@ -1,7 +1,16 @@
-﻿using System.Windows.Media.Imaging;
+
 using Newtonsoft.Json;
+using RoomLabelMakerApp.Views;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Markup;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
+using Newtonsoft.Json;
 using Microsoft.Win32;
+using System.Windows.Media.Imaging;
 namespace RoomLabelMakerApp.Models;
 
 public class DoorLabelModel
@@ -121,4 +130,31 @@ public class DoorLabelModel
         }
     }
 
+    public static void Print(FlowDocument flowDocument)
+    {
+        PrintDialog pd = new PrintDialog();
+        String copyString = XamlWriter.Save(flowDocument);
+        FlowDocument copy = XamlReader.Parse(copyString) as FlowDocument;
+
+        //copy of FlowDocument to not change state of DoorLabel original Flow Document
+        copy.PageHeight = pd.PrintableAreaHeight;
+        copy.PageWidth = pd.PrintableAreaWidth;
+        copy.PagePadding = new Thickness(30);
+        copy.ColumnGap = 0;
+        copy.ColumnWidth = pd.PrintableAreaWidth;
+
+        //Create Window for Print View
+        if (File.Exists("PreviewPrinting.xps"))
+        {
+            File.Delete("PreviewPrinting.xps");
+        }
+
+        var xpsDocument = new XpsDocument("PreviewPrinting.xps", FileAccess.ReadWrite);
+        XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(xpsDocument);
+        writer.Write(((IDocumentPaginatorSource)copy).DocumentPaginator);
+        var Document = xpsDocument.GetFixedDocumentSequence();
+        xpsDocument.Close();
+        var windows = new PrintPreviewView(Document);
+        windows.ShowDialog();
+    }
 }
