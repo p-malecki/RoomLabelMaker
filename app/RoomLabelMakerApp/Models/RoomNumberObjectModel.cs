@@ -10,7 +10,11 @@ public partial class RoomNumberObjectModel
     static string defaultText = "0000";
     static string defaultFontStyle = "Italic";
     static string defaultForegroundColor = "Black";
-    static double defaultFontSize = 120;
+    static string defaultFontSize = "120";
     
     public string Text { get; set; }
+    
+    public string FontStyle { get; set; }
+    
+    public string FontSize { get; set; }
 }

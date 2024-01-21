@@ -6,12 +6,17 @@ namespace RoomLabelMakerApp.Models;
 
 public partial class RoomNumberObjectModel : ObjectBase, IContentObject
 {
-    public RoomNumberObjectModel() : base (defaultX, defaultY, defaultWidth, defaultHeight)
+    public RoomNumberObjectModel() : base(defaultX, defaultY, defaultWidth, defaultHeight)
     {
-        // FontStyle = defaultFontStyle;
-        // FontSize = defaultFontSize;
-        // ForegroundColor = defaultForegroundColor;
+        FontStyle = defaultFontStyle;
+        FontSize = defaultFontSize;
         Text = defaultText;
+    }
+    public RoomNumberObjectModel(string text, string font_style, string font_size) : base(defaultX, defaultY, defaultWidth, defaultHeight)
+    {
+        FontStyle = font_style;
+        FontSize = font_size;
+        Text = text;
     }
 
     public override string Serialize()

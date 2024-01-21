@@ -67,12 +67,12 @@
             </Grid.ColumnDefinitions>
             <ToolBar Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <ComboBox x:Name="cmbFontSizeRoomNumber" Width="50" SelectedIndex="4" SelectionChanged="cmbFontSizeRoomNumber_SelectionChanged">
-                    <ComboBoxItem Content="10"/>
-                    <ComboBoxItem Content="12"/>
-                    <ComboBoxItem Content="14"/>
-                    <ComboBoxItem Content="16"/>
-                    <ComboBoxItem Content="18"/>
                     <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="24"/>
+                    <ComboBoxItem Content="28"/>
+                    <ComboBoxItem Content="32"/>
+                    <ComboBoxItem Content="36"/>
+                    <ComboBoxItem Content="40"/>
                 </ComboBox>
 
                 <ComboBox x:Name="cmbFontFamilyRoomNumber" Width="100" SelectedIndex="0" SelectionChanged="cmbFontFamilyRoomNumber_SelectionChanged">
@@ -85,11 +85,11 @@
 
                 <ComboBox x:Name="cmbFontSizeNames" Width="50" SelectedIndex="3" SelectionChanged="cmbFontSizeNames_SelectionChanged">
                     <ComboBoxItem Content="10"/>
-                    <ComboBoxItem Content="12"/>
                     <ComboBoxItem Content="14"/>
-                    <ComboBoxItem Content="16"/>
                     <ComboBoxItem Content="18"/>
-                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="26"/>
+                    <ComboBoxItem Content="30"/>
                 </ComboBox>
 
                 <ComboBox x:Name="cmbFontFamilyNames" Width="100" SelectedIndex="0" SelectionChanged="cmbFontFamilyNames_SelectionChanged">
