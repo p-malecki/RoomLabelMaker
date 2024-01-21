@@ -4,7 +4,22 @@ namespace RoomLabelMakerApp.Models;
 
 public class DoorLabelModel
 {
-    public class RootObject
+    public int Id;
+    public string Name;
+    public RoomNumberObjectModel RoomNumber;
+    public RoomMembersObjectModel RoomMembers;
+    public LogoObjectModel Logo;
+
+    public DoorLabelModel()
+    {
+        Id = 0;
+        Name = "";
+        RoomNumber = new();
+        RoomMembers = new();
+        Logo = new();
+    }
+
+    public class RootObjectSerialize
     {
         public List<ObjectBase> Objects { get; set; }
 
@@ -13,23 +28,23 @@ public class DoorLabelModel
             var objectsJson = new List<object>();
             foreach (var obj in Objects)
             {
-                objectsJson.Add(JsonConvert.DeserializeObject(obj.Serialize()));
+                objectsJson.Add(JsonConvert.DeserializeObject(obj.Serialize())!);
             }
             return JsonConvert.SerializeObject(new { objects = objectsJson });
         }
     }
 
-    public int Id;
-    public string Name;
-    public RoomNumberObjectModel RoomNumber;
-    public RoomMembersObjectModel RoomMembers;
-    public LogoObjectModel Logo;
+    public class RootObjectDeserialize
+    {
+        public List<Dictionary<string, object>> Objects { get; set; }
+
+    }
 
     public string Serialize()
     {
-        RootObject rootObject = new RootObject
+        RootObjectSerialize rootObject = new RootObjectSerialize
         {
-            Objects = new List<ObjectBase> { RoomNumber, RoomMembers, Logo}
+            Objects = new List<ObjectBase> { RoomNumber, RoomMembers, Logo }
         };
 
         string resultJson = rootObject.SerializeToJson();
@@ -38,23 +53,23 @@ public class DoorLabelModel
 
     public void Deserialize(string json)
     {
-        List<Dictionary<string, object>> rootObjectList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+        RootObjectDeserialize rootObjects = JsonConvert.DeserializeObject<RootObjectDeserialize>(json)!;
 
-        foreach (var obj in rootObjectList)
+        foreach (var obj in rootObjects.Objects)
         {
             foreach (var kvp in obj)
             {
                 switch (kvp.Key)
                 {
                     case "RoomNumberObjectModel":
-                        RoomNumber = JsonConvert.DeserializeObject<RoomNumberObjectModel>(kvp.Value.ToString());
+                        RoomNumber = JsonConvert.DeserializeObject<RoomNumberObjectModel>(kvp.Value.ToString())!;
                         break;
 
                     case "RoomMembersObjectModel":
-                        RoomMembers = JsonConvert.DeserializeObject<RoomMembersObjectModel>(kvp.Value.ToString());
+                        RoomMembers = JsonConvert.DeserializeObject<RoomMembersObjectModel>(kvp.Value.ToString())!;
                         break;
                     case "LogoObjectModel":
-                        Logo = JsonConvert.DeserializeObject<LogoObjectModel>(kvp.Value.ToString());
+                        Logo = JsonConvert.DeserializeObject<LogoObjectModel>(kvp.Value.ToString())!;
                         break;
                     default:
                         Console.WriteLine($"Unknown class type: {kvp.Key}");
@@ -63,4 +78,5 @@ public class DoorLabelModel
             }
         }
     }
+
 }
