@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RoomLabelMakerApp"
+        xmlns:local="clr-namespace:RoomLabelMakerApp.Models"
         mc:Ignorable="d"
         Title="Room label maker" Height="500" Width="850">
     <Grid>
-
         <!-- Lewy panel -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -41,9 +40,11 @@
             </Grid.RowDefinitions>
 
 
-            <TextBox x:Name="txtRoomNumber1" Grid.Column="1" Grid.Row="1" Margin="91,0,10,0" Grid.ColumnSpan="5"/>
-            <TextBox Grid.Row="2" Margin="46,44,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
-            <Image Margin="10,24,60,50" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+            <TextBox FontSize="40" FontFamily="Verdana" FontWeight="Bold" 
+                     x:Name="txtRoomNumber1" Grid.Column="1" Grid.Row="1" Margin="91,0,10,0" Grid.ColumnSpan="5"/>
+            <TextBox FontSize="25" FontFamily="Verdana"
+                     x:Name="txtNames1" Grid.Row="2" Margin="46,44,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+            <Image x:Name="logo" Margin="10,24,60,50" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
 
         </Grid>
 
@@ -74,7 +75,7 @@
                      HorizontalScrollBarVisibility="Auto"
                     AcceptsReturn="True" TextWrapping="Wrap" 
                 FontSize="14" FontFamily="Verdana" FontWeight="Bold"
-                    x:Name="txtRoomNumber" Height="30" Margin="5,24,20,10" Grid.Column="1"/>
+                    x:Name="txtRoomNumber" TextChanged="Numbers_TextChanged" Height="30" Margin="5,24,20,10" Grid.Column="1"/>
 
 
             <!-- Pole tekstowe zamiast przycisku 2 -->
@@ -82,13 +83,11 @@
             <TextBlock Text="Names:" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.671,5.195" Margin="5,10,15,54" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <TextBox  Grid.Row="2" 
                       AcceptsReturn="True" TextWrapping="Wrap" 
-                      x:Name="txtNames" Grid.Column="1" 
-                      Margin="5,32,20,10" 
-                      Grid.RowSpan="2"
-                      FontSize="14" FontFamily="Verdana" FontWeight="Bold"/>
+                      FontSize="14" FontFamily="Verdana" FontWeight="Bold"
+                      x:Name="txtNames" TextChanged="Names_TextChanged" Grid.Column="1" Margin="5,32,20,10" Grid.RowSpan="2"/>
 
 
-            <Button x:Name="btnLoadImage" Content="Load image" Margin="5,5,5,5" Grid.Row="4" Grid.Column="1"/>
+            <Button x:Name="btnLoadImage" Content="Load image" Margin="5,5,5,5" Grid.Row="4" Grid.Column="1" Click="btnLoadImage_Click" />
             <Button x:Name="btnSave" Content="Save" Margin="5" Grid.Row="5" Grid.Column="1"/>
             <Button x:Name="btnPrint" Content="Print" Margin="5" Grid.Row="6" Grid.Column="1"/>
         </Grid>
