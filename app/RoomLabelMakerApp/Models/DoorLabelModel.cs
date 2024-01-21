@@ -52,10 +52,10 @@ public class DoorLabelModel
 
     }
 
-    public void set_Variables(string room_number, string room_members, string logo)
+    public void set_Variables(RoomNumberObjectModel room_number, RoomMembersObjectModel room_members, string logo)
     {
-        RoomNumber.Text = room_number;
-        RoomMembers.Text = room_members;
+        RoomNumber = room_number;
+        RoomMembers = room_members;
         Logo.ImageData = logo;
     }
 
