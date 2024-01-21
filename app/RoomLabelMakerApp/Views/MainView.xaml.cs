@@ -2,8 +2,9 @@
 using RoomLabelMakerApp.Models;
 using System.Windows.Media;
 using System.Windows;
-using RoomLabelMakerApp.Models;
 using System.Windows.Controls;
+using System.Windows.Documents;
+
 
 namespace RoomLabelMakerApp
 {
@@ -39,6 +40,11 @@ namespace RoomLabelMakerApp
             image_data = path;
         }
 
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument flowDocument = FindName("flowDoc") as FlowDocument;
+            DoorLabelModel.Print(flowDocument);
+        }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             doorlabelmodel.set_Variables(new RoomNumberObjectModel(room_number,txtRoomNumber1.FontFamily.ToString(),txtRoomNumber1.FontSize.ToString())
