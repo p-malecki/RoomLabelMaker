@@ -87,6 +87,7 @@
                 <ComboBox x:Name="cmbFontFamilyRoomNumber" Width="100" SelectedIndex="0" SelectionChanged="cmbFontFamilyRoomNumber_SelectionChanged">
                     <ComboBoxItem Content="Verdana"/>
                     <ComboBoxItem Content="Arial"/>
+                    <ComboBoxItem Content="Calibri"/>
                     <!-- Add more font options as needed -->
                 </ComboBox>
 

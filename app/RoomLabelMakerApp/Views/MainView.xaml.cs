@@ -101,10 +101,10 @@ namespace RoomLabelMakerApp
                 txtRoomNumber1.FontFamily = new FontFamily(selectedValue);
             }
         }
-        /*
-        private void cmbFontSizeNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+       /* private void cmbFontSizeNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem selectedItem = cmbFontSizeNames.SelectedItem as ComboBoxItem;
+            ComboBoxItem selectedItem = cmbFontSizeRoomNumber.SelectedItem as ComboBoxItem;
             if (selectedItem != null)
             {
                 string selectedValue = selectedItem.Content.ToString();
@@ -117,14 +117,14 @@ namespace RoomLabelMakerApp
 
         private void cmbFontFamilyNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem selectedItem = cmbFontFamilyNames.SelectedItem as ComboBoxItem;
+            ComboBoxItem selectedItem = cmbFontFamilyRoomNumber.SelectedItem as ComboBoxItem;
             if (selectedItem != null)
             {
                 string selectedValue = selectedItem.Content.ToString();
                 txtNames1.FontFamily = new FontFamily(selectedValue);
             }
-        }
-        */
+        }*/
+        
         
     }
 }
