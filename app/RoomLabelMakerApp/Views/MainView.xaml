@@ -40,12 +40,49 @@
             </Grid.RowDefinitions>
 
 
-            <TextBox FontSize="40" FontFamily="Verdana" FontWeight="Bold" 
-                     x:Name="txtRoomNumber1" Grid.Column="1" Grid.Row="1" Margin="91,0,10,0" Grid.ColumnSpan="5"/>
-            <TextBox FontSize="25" FontFamily="Verdana"
-                     x:Name="txtNames1" Grid.Row="2" Margin="46,44,10,10" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
-            <Image x:Name="logo" Margin="10,24,60,50" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
 
+            <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="6" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                <FlowDocument Name="myFLowDoc">
+                    <Table>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell>
+                                    <BlockUIContainer>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+
+                                            </Grid.RowDefinitions>
+                                            <TextBlock TextAlignment="Left" FontSize="40" FontFamily="Verdana" FontWeight="Bold" 
+                                                     x:Name="txtRoomNumber1" Grid.Column="2" Grid.Row="1" Margin="91,0,10,0" Grid.ColumnSpan="6"/>
+                                            <TextBlock TextAlignment="Left"  FontSize="25" FontFamily="Verdana"
+                            x:Name="txtNames1" Grid.Row="2" Margin="46,10,10,10" Grid.ColumnSpan="6" Grid.RowSpan="6"/>
+                                            <Image Height="150" Width="150" x:Name="logo" Margin="10,24,60,20" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                                        </Grid>
+
+
+
+                                    </BlockUIContainer>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
         </Grid>
 
         <!-- Prawy panel -->
