@@ -42,7 +42,7 @@
 
 
             <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="6" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-                <FlowDocument Name="myFLowDoc">
+                <FlowDocument x:Name="myFLowDoc">
                     <Table>
                         <TableRowGroup>
                             <TableRow>

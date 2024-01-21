@@ -42,7 +42,7 @@ namespace RoomLabelMakerApp
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-            FlowDocument flowDocument = FindName("myFLowDoc") as FlowDocument;
+            FlowDocument flowDocument = myFLowDoc;
             DoorLabelModel.Print(flowDocument);
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
