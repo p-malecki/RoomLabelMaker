@@ -101,7 +101,7 @@ namespace RoomLabelMakerApp
                 txtRoomNumber1.FontFamily = new FontFamily(selectedValue);
             }
         }
-        
+        /*
         private void cmbFontSizeNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selectedItem = cmbFontSizeNames.SelectedItem as ComboBoxItem;
@@ -124,6 +124,7 @@ namespace RoomLabelMakerApp
                 txtNames1.FontFamily = new FontFamily(selectedValue);
             }
         }
+        */
         
     }
 }
