@@ -1,130 +1,38 @@
 ﻿using RoomLabelMakerApp.ViewModels;
-using RoomLabelMakerApp.Models;
-using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
+using RoomLabelMakerApp.Models;
+
+namespace RoomLabelMakerApp;
 
 
-namespace RoomLabelMakerApp
+public partial class MainView : Window
 {
-    public partial class MainView : Window
+    public MainView()
     {
-        private string room_number = string.Empty;
-        private string room_names = string.Empty;
-        private string image_data = string.Empty;
-        private DoorLabelModel doorlabelmodel = new DoorLabelModel();
+        InitializeComponent();
+        DataContext = new MainViewModel();
 
-        public MainView()
-        {
-            InitializeComponent();
-            DataContext = new MainViewModel();
-        }
 
-        private void Numbers_TextChanged(object sender, RoutedEventArgs e)
-        {
-            room_number = txtRoomNumber.Text;
-            txtRoomNumber1.Text = room_number;
-        }
+        ImgNewProject.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/empty-page.png"));
+        ImgOpenProject.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/folder.png"));
+        ImgSaveProject1.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/floppy-disk.png"));
+        ImgLoadImage.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/media-image-plus.png"));
+        ImgSaveProject2.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/floppy-disk.png"));
+        ImgPrint.Source = ImageObjectModel.UrlToBitmap(Utils.PathHelper.GetAssetPath(@"/Assets/printing-page.png"));
+    }
 
-        private void Names_TextChanged(object sender, RoutedEventArgs e)
+    private void ToolBar_Loaded(object sender, RoutedEventArgs e)
+    {
+        var toolBar = sender as ToolBar;
+        if (toolBar?.Template.FindName("OverflowGrid", toolBar) is FrameworkElement overflowGrid)
         {
-            room_names = txtNames.Text;
-            txtNames1.Text = room_names;
+            overflowGrid.Visibility = Visibility.Collapsed;
         }
 
-        private void btnLoadImage_Click(object sender, RoutedEventArgs e)
+        if (toolBar?.Template.FindName("MainPanelBorder", toolBar) is FrameworkElement mainPanelBorder)
         {
-            string path = Models.LogoObjectModel.get_path_to_logo(sender, e);
-            logo.Source = Models.LogoObjectModel.url_to_bitmap(path);
-            image_data = path;
+            mainPanelBorder.Margin = new Thickness();
         }
-
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
-        {
-            FlowDocument flowDocument = myFLowDoc;
-            DoorLabelModel.Print(flowDocument);
-        }
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            doorlabelmodel.set_Variables(new RoomNumberObjectModel(room_number,txtRoomNumber1.FontFamily.ToString(),txtRoomNumber1.FontSize.ToString())
-                ,new RoomMembersObjectModel(room_names, txtNames1.FontFamily.ToString(), txtNames1.FontSize.ToString()), image_data);
-            var result = doorlabelmodel.Serialize();
-            doorlabelmodel.save_json_to_file(result);
-        }
-
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
-        {
-            string json = doorlabelmodel.load_json_from_file();
-            if (json != "")
-            {
-                doorlabelmodel.Deserialize(json);
-                room_number = doorlabelmodel.RoomNumber.Text;
-                txtRoomNumber1.FontFamily = new FontFamily(doorlabelmodel.RoomNumber.FontStyle);
-                txtRoomNumber1.FontSize = Convert.ToDouble(doorlabelmodel.RoomNumber.FontSize);
-                room_names = doorlabelmodel.RoomMembers.Text;
-                txtNames1.FontFamily = new FontFamily(doorlabelmodel.RoomMembers.FontStyle);
-                txtNames1.FontSize = Convert.ToDouble(doorlabelmodel.RoomMembers.FontSize);
-                image_data = doorlabelmodel.Logo.ImageData;
-            }
-            refresh_screen();
-        }
-
-        private void refresh_screen()
-        {
-            txtRoomNumber1.Text = room_number;
-            txtNames1.Text = room_names;
-            txtRoomNumber.Text = room_number;
-            txtNames.Text = room_names;
-            logo.Source = Models.LogoObjectModel.url_to_bitmap(image_data);
-        }
-
-        private void cmbFontSizeRoomNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem selectedItem = cmbFontSizeRoomNumber.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
-            {
-                string selectedValue = selectedItem.Content.ToString();
-                if (int.TryParse(selectedValue, out int fontSize))
-                {
-                    txtRoomNumber1.FontSize = fontSize;
-                }
-            }
-        }
-
-        private void cmbFontFamilyRoomNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem selectedItem = cmbFontFamilyRoomNumber.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
-            {
-                string selectedValue = selectedItem.Content.ToString();
-                txtRoomNumber1.FontFamily = new FontFamily(selectedValue);
-            }
-        }
-        
-       /* private void cmbFontSizeNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem selectedItem = cmbFontSizeRoomNumber.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
-            {
-                string selectedValue = selectedItem.Content.ToString();
-                if (int.TryParse(selectedValue, out int fontSize))
-                {
-                    txtNames1.FontSize = fontSize;
-                }
-            }
-        }
-
-        private void cmbFontFamilyNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem selectedItem = cmbFontFamilyRoomNumber.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
-            {
-                string selectedValue = selectedItem.Content.ToString();
-                txtNames1.FontFamily = new FontFamily(selectedValue);
-            }
-        }*/
-        
-        
     }
 }
