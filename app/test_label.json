@@ -1,0 +1,31 @@
+{
+  "RoomNumber": {
+    "Text": "1234",
+    "FontFamily": "Times New Roman",
+    "FontSize": 80,
+    "FontWeight": "Bold",
+    "FontStyle": "Normal",
+    "X": 0,
+    "Y": 0,
+    "Width": 0,
+    "Height": 0
+  },
+  "RoomMembers": {
+    "Text": "Jan Kowalski\r\nAdam Nowak",
+    "FontFamily": "Courier New",
+    "FontSize": 40,
+    "FontWeight": "Normal",
+    "FontStyle": "Normal",
+    "X": 0,
+    "Y": 0,
+    "Width": 0,
+    "Height": 0
+  },
+  "Image": {
+    "ImageData": "file:///C:/Users/Pawe%C5%82/Documents/projects/RoomLabelMaker/app/RoomLabelMakerApp/UJ-logos/logo_czarne.png",
+    "X": 0,
+    "Y": 0,
+    "Width": 0,
+    "Height": 0
+  }
+}

@@ -6,11 +6,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Utils\" />
     <Folder Include="UJ-logos\" />
   </ItemGroup>
 
