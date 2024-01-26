@@ -1,13 +1,19 @@
-﻿namespace RoomLabelMakerApp.Models;
+﻿using Newtonsoft.Json;
+
+namespace RoomLabelMakerApp.Models;
 
 public abstract class ObjectBase : IContentObject
 {
-    protected int _x;
-    protected int _y;
-    protected int _width;
-    protected int _height;
+    private int _x;
+    private int _y;
+    private int _width;
+    private int _height;
 
-    public ObjectBase(int x, int y, int width, int height)
+    protected ObjectBase()
+    {
+    }
+
+    protected ObjectBase(int x, int y, int width, int height)
     {
         _x = x;
         _y = y;
@@ -20,13 +26,13 @@ public abstract class ObjectBase : IContentObject
     /// zmienic w kazdym z objektow spsob zapisu _x, _y 
     /// </summary>
 
-    public int x
+    public int X
     {
         get => _x;
         set => _x = value;
     }
 
-    public int y
+    public int Y
     {
         get => _y;
         set => _y = value;
@@ -56,6 +62,14 @@ public abstract class ObjectBase : IContentObject
         this._height = height;
     }
 
-    abstract public string Serialize();
+    public string Serialize()   
+    {
+        return JsonConvert.SerializeObject(this);
+    }
+
+    public static T? Deserialize<T>(string json) where T : ObjectBase
+    {
+        return JsonConvert.DeserializeObject<T>(json);
+    }
 }
 
