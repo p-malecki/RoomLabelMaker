@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 namespace RoomLabelMakerApp.Commands;
 
-public class RelayCommand : ICommand
+public class RelayCommand<T> : ICommand
 {
     #region Fields 
 

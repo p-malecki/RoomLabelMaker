@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace RoomLabelMakerApp.Views
@@ -8,13 +9,12 @@ namespace RoomLabelMakerApp.Views
     /// </summary>
     public partial class PrintPreviewView : Window
     {
-        private FixedDocumentSequence _documnentPreview;
-
         public PrintPreviewView(FixedDocumentSequence document)
         {
-            _documnentPreview = document;
             InitializeComponent();
+
             PreviewDocument.Document = document;
+            PreviewDocument.FitToHeight();
         }
     }
 }

@@ -16,6 +16,12 @@ public class DoorLabelModel
     public TextObjectModel? RoomMembers;
     public ImageObjectModel? Image;
 
+    public DoorLabelModel()
+    {
+        RoomNumber = null;
+        RoomMembers = null;
+        Image = null;
+    }
 
     public void SetData(TextObjectModel roomNumberModel, TextObjectModel roomMembersModel, string logo)
     {
@@ -38,12 +44,14 @@ public class DoorLabelModel
         Image = d.Image;
     }
 
-    public static void Print(FlowDocument flowDocument)
+    public static void Print(FlowDocument flowDocument, int numberOfCopies)
     {
         var pd = new PrintDialog();
         var stringCopy = XamlWriter.Save(flowDocument); // copy to prevent changes to the original Flow Document
         if (XamlReader.Parse(stringCopy) is not FlowDocument flowDocumentCopy)
             return;
+
+        CloneBlockInFlowDocument(flowDocumentCopy, numberOfCopies-1);
 
         flowDocumentCopy.PageHeight = pd.PrintableAreaHeight;
         flowDocumentCopy.PageWidth = pd.PrintableAreaWidth;
@@ -51,10 +59,16 @@ public class DoorLabelModel
         flowDocumentCopy.ColumnGap = 0;
         flowDocumentCopy.ColumnWidth = pd.PrintableAreaWidth;
 
-        // create window for print view
-        if (File.Exists("PreviewPrinting.xps"))
+        
+        try
         {
-            File.Delete("PreviewPrinting.xps");
+            // create window for print view
+            if (File.Exists("PreviewPrinting.xps"))
+                File.Delete("PreviewPrinting.xps");
+        }
+        catch
+        {
+            // ignored
         }
 
         FixedDocumentSequence? document;
@@ -68,5 +82,18 @@ public class DoorLabelModel
         if (document == null) return;
         var windows = new PrintPreviewView(document);
         windows.ShowDialog();
+    }
+
+    private static void CloneBlockInFlowDocument(FlowDocument flowDocumentCopy, int numberOfCopies)
+    {
+        var block = flowDocumentCopy.Blocks.FirstBlock;
+        if (block == null) return;
+       
+        for (var i = 0; i < numberOfCopies; i++)
+        {
+            var xamlString = XamlWriter.Save(block);
+            if (XamlReader.Parse(xamlString) is not Block clonedBlock) return;
+            flowDocumentCopy.Blocks.Add(clonedBlock);
+        }
     }
 }

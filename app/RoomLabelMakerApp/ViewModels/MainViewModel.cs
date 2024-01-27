@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Windows.Media;
 namespace RoomLabelMakerApp.ViewModels;
 
 
@@ -32,12 +32,14 @@ public class MainViewModel : INotifyPropertyChanged
         "Trebuchet MS",
         "Verdana"
     ];
+    public ObservableCollection<int> NumberOfPrintCopies { get; } = [1,2,3,4,5,6,7,8];
 
     private TextObjectModel _roomNumber;
     private TextObjectModel _roomMembers;
     private BitmapImage? _imageData;
     private DoorLabelModel _doorLabelModel;
     private FlowDocument _flowDocumentLabelPreview;
+    private int _selectedNumberOfPrintCopies;
     private readonly TextObjectModel _defaultRoomNumber = new ("[0000]", "Verdana", 60, true, false);
     private readonly TextObjectModel _defaultRoomMembers = new("[name surname]\r\n[name surname]", "Verdana", 40, false, false);
 
@@ -46,14 +48,16 @@ public class MainViewModel : INotifyPropertyChanged
         CleanView();
         _doorLabelModel = new DoorLabelModel();
         _flowDocumentLabelPreview = CreateFlowDocument();
+        _selectedNumberOfPrintCopies = 1;
 
         AddFontSizes();
 
-        NewFileCommand = new RelayCommand(NewFile);
-        OpenFileCommand = new RelayCommand(OpenFile);
-        SaveFileCommand = new RelayCommand(SaveFile);
-        LoadImageCommand = new RelayCommand(LoadImage);
-        PrintCommand = new RelayCommand(Print);
+        NewFileCommand = new RelayCommand<object>(NewFile);
+        OpenFileCommand = new RelayCommand<object>(OpenFile);
+        SaveFileCommand = new RelayCommand<object>(SaveFile);
+        LoadImageCommand = new RelayCommand<object>(LoadImage);
+        PrintCommand = new RelayCommand<object>(Print);
+        ToggleCommand = new RelayCommand<ToggleButton>(ToggleButtonClicked);
     }
 
     #region Properties
@@ -98,6 +102,16 @@ public class MainViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(FlowDocumentLabelPreview));
         }
     }
+  
+    public int SelectedNumberOfPrintCopies
+    {
+        get => _selectedNumberOfPrintCopies;
+        set
+        {
+            _selectedNumberOfPrintCopies = value;
+            OnPropertyChanged(nameof(SelectedNumberOfPrintCopies));
+        }
+    }
 
     #endregion // Properties
 
@@ -109,6 +123,7 @@ public class MainViewModel : INotifyPropertyChanged
     public ICommand SaveFileCommand { get; set; }
     public ICommand LoadImageCommand { get; set; }
     public ICommand PrintCommand { get; set; }
+    public ICommand ToggleCommand { get; set; }
 
     #endregion // Commands
 
@@ -151,7 +166,7 @@ public class MainViewModel : INotifyPropertyChanged
 
     private void Print(object obj)
     {
-        DoorLabelModel.Print(_flowDocumentLabelPreview);
+        DoorLabelModel.Print(_flowDocumentLabelPreview, SelectedNumberOfPrintCopies);
     }
 
     private void CleanView()
@@ -161,44 +176,43 @@ public class MainViewModel : INotifyPropertyChanged
         ImageData = ImageObjectModel.UrlToBitmap(PathHelper.GetAssetPath(@"\UJ-logos\logo_basic.png"));
     }
 
-
     private static FlowDocument CreateFlowDocument()
     {
         var flowDocument = new FlowDocument();
-        var table = new Table();
+        var table = new Table
+        {
+            Background = Brushes.White
+        };
         var tableRowGroup = new TableRowGroup();
         var tableRow = new TableRow();
         var tableCell = new TableCell();
         var blockUiContainer = new BlockUIContainer();
 
         var grid = new Grid();
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < 2; i++)
         {
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) });
         }
+
 
         var imgLoadedLogo = new Image
         {
             Height = 150,
             Width = 150,
-            Margin = new Thickness(10, 25, 60, 20)
+            Margin = new Thickness(0, 15, 30, 20)
         };
         Grid.SetRow(imgLoadedLogo, 0);
         Grid.SetColumn(imgLoadedLogo, 0);
-        Grid.SetRowSpan(imgLoadedLogo, 2);
-        Grid.SetColumnSpan(imgLoadedLogo, 2);
         imgLoadedLogo.SetBinding(Image.SourceProperty, nameof(ImageData));
 
         var txtRoomNumberPreview = new TextBlock
         {
             TextAlignment = TextAlignment.Left,
-            Margin = new Thickness(90, 0, 10, 0)
+            Margin = new Thickness(0, 70, 10, 0)
         };
         Grid.SetRow(txtRoomNumberPreview, 0);
-        Grid.SetColumn(txtRoomNumberPreview, 2);
-        Grid.SetRowSpan(txtRoomNumberPreview, 6);
-        Grid.SetColumnSpan(txtRoomNumberPreview, 4);
+        Grid.SetColumn(txtRoomNumberPreview, 1);
         txtRoomNumberPreview.SetBinding(TextBlock.TextProperty, "RoomNumber.Text");
         txtRoomNumberPreview.SetBinding(TextBlock.FontFamilyProperty, "RoomNumber.FontFamily");
         txtRoomNumberPreview.SetBinding(TextBlock.FontSizeProperty, "RoomNumber.FontSize");
@@ -208,12 +222,11 @@ public class MainViewModel : INotifyPropertyChanged
         var txtMembersPreview = new TextBlock
         {
             TextAlignment = TextAlignment.Left,
-            Margin = new Thickness(45, 10, 10, 10)
+            Margin = new Thickness(130, 10, 10, 20)
         };
-        Grid.SetRow(txtMembersPreview, 2);
-        Grid.SetColumn(txtMembersPreview, 1);
-        Grid.SetRowSpan(txtMembersPreview, 4);
-        Grid.SetColumnSpan(txtMembersPreview, 5);
+        Grid.SetRow(txtMembersPreview, 1);
+        Grid.SetColumn(txtMembersPreview, 0);
+        Grid.SetColumnSpan(txtMembersPreview, 2);
         txtMembersPreview.SetBinding(TextBlock.TextProperty, "RoomMembers.Text");
         txtMembersPreview.SetBinding(TextBlock.FontFamilyProperty, "RoomMembers.FontFamily");
         txtMembersPreview.SetBinding(TextBlock.FontSizeProperty, "RoomMembers.FontSize");
@@ -243,6 +256,33 @@ public class MainViewModel : INotifyPropertyChanged
         for (var fontSize = 40; fontSize <= 95; fontSize += 5)
         {
             FontSizes.Add(fontSize);
+        }
+    }
+
+    private void ToggleButtonClicked(object toggleButton)
+    {
+        if (toggleButton is not ToggleButton tb) return;
+        if (tb.Name.Contains("Number"))
+        {
+            if (tb.Name.Contains("Bold"))
+            {
+                RoomNumber.FontIsBold = !RoomNumber.FontIsBold;
+            }
+            else if (tb.Name.Contains("Italic"))
+            {
+                RoomNumber.FontIsItalic = !RoomNumber.FontIsItalic;
+            }
+        }
+        else if (tb.Name.Contains("Members"))
+        {
+            if (tb.Name.Contains("Bold"))
+            {
+                RoomMembers.FontIsBold = !RoomMembers.FontIsBold;
+            }
+            else if (tb.Name.Contains("Italic"))
+            {
+                RoomMembers.FontIsItalic = !RoomMembers.FontIsItalic;
+            }
         }
     }
 

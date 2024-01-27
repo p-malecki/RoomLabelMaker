@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RoomLabelMakerApp.Views"
         mc:Ignorable="d"
-        Title="PrintPreviewView" Height="450" Width="800">
+        Title="PrintPreviewView" Height="800" Width="700" WindowStartupLocation="CenterScreen">
     <DocumentViewer x:Name="PreviewDocument" />
 </Window>

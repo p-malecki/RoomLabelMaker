@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Room Label Maker" Height="500" Width="850" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Room Label Maker" Height="500" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Window.Resources>
 
@@ -20,7 +20,7 @@
         <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded"
                  DockPanel.Dock="Top" Height="30"
                  >
-            <Button TabIndex="0" Command="{Binding NewFileCommand}" Margin="5,0,0,0">
+            <Button Command="{Binding NewFileCommand}" Margin="5,0,0,0">
                 <Button.Content>
                     <WrapPanel>
                         <Image Name="ImgNewProject" Width="16" Height="16"/>
@@ -76,7 +76,7 @@
             </Button>
         </ToolBar>
 
-        <Grid>
+        <Grid Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -90,21 +90,22 @@
             <!-- Left panel -->
 
             <FlowDocumentScrollViewer Name="FdLabelPreviewViewer"
-                                          Document="{Binding FlowDocumentLabelPreview}"
-                                          Grid.Row="1" Grid.Column="0"
-                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"
-                                          Margin="10">
+                                      Document="{Binding FlowDocumentLabelPreview}"
+                                      Grid.Row="1" Grid.Column="0"
+                                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"
+                                      Margin="10">
             </FlowDocumentScrollViewer>
-            
+
 
             <!-- Right panel -->
             <Grid Grid.Column="1" Grid.Row="1" Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="73*"/>
+                    <RowDefinition Height="148*"/>
+                    <RowDefinition Height="49*"/>
+                    <RowDefinition Height="49*"/>
+                    <RowDefinition Height="49*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -112,7 +113,7 @@
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="1">
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,147" Grid.RowSpan="3">
                     <Label Content="_Room number:" FontSize="15" Margin="5,0,5,0"/>
                     <WrapPanel Height="20">
                         <ComboBox
@@ -124,9 +125,25 @@
                         <ComboBox
                             ItemsSource="{Binding FontFamilies}"
                             SelectedItem="{Binding RoomNumber.FontFamily}"
-                            Width="158" HorizontalAlignment="Center"
+                            Width="115" HorizontalAlignment="Center"
                             Margin="5, 0, 0, 0"
                             />
+                        <Button Name="TbNumberFontIsBold"
+                                      Command="{Binding ToggleCommand}"
+                                      CommandParameter="{Binding ElementName=TbNumberFontIsBold}"
+                                      Margin="5,0,0,0">
+                            <Button.Content>
+                                <TextBlock Margin="2,0,2,0"><Bold>B</Bold></TextBlock>
+                            </Button.Content>
+                        </Button>
+                        <Button Name="TbNumberFontIsItalic"
+                                Command="{Binding ToggleCommand}"
+                                CommandParameter="{Binding ElementName=TbNumberFontIsItalic}"
+                                Margin="5,0,0,0">
+                            <Button.Content>
+                                <TextBlock Margin="4,0,4,0"><Italic>I</Italic></TextBlock>
+                            </Button.Content>
+                        </Button>
                     </WrapPanel>
                     <TextBox Name="TxtRoomNumber"
                              Text="{Binding RoomNumber.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -136,7 +153,7 @@
                     />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Grid.Column="1">
+                <StackPanel Grid.Row="2" Grid.Column="1">
                     <Label Content="_Members:" FontSize="15" Margin="5,5,5,0"/>
                     <WrapPanel Height="20">
                         <ComboBox
@@ -148,9 +165,25 @@
                         <ComboBox 
                             ItemsSource="{Binding FontFamilies}"
                             SelectedItem="{Binding RoomMembers.FontFamily}"
-                            Width="158" HorizontalAlignment="Center"
+                            Width="115" HorizontalAlignment="Center"
                             Margin="5, 0, 0, 0"
                             />
+                        <Button Name="TbMembersFontIsBold"
+                                Command="{Binding ToggleCommand}"
+                                CommandParameter="{Binding ElementName=TbMembersFontIsBold}"
+                                Margin="5,0,0,0">
+                            <Button.Content>
+                                <TextBlock Margin="2,0,2,0"><Bold>B</Bold></TextBlock>
+                            </Button.Content>
+                        </Button>
+                        <Button Name="TbMembersFontIsItalic"
+                                Command="{Binding ToggleCommand}"
+                                CommandParameter="{Binding ElementName=TbMembersFontIsItalic}"
+                                Margin="5,0,0,0">
+                            <Button.Content>
+                                <TextBlock Margin="4,0,4,0"><Italic>I</Italic></TextBlock>
+                            </Button.Content>
+                        </Button>
                     </WrapPanel>
                     <TextBox  Name="TxtMembers"  
                               Text="{Binding RoomMembers.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -163,7 +196,7 @@
                 <Button Name="BtnLoadImage"
                         Command="{Binding LoadImageCommand}"
                         ToolTip="Select an image to be used as a logo."
-                        Grid.Row="2" Grid.Column="1"
+                        Grid.Row="3" Grid.Column="1" Margin="5,5,5,5"
                         >
                     <Button.Content>
                         <WrapPanel>
@@ -175,27 +208,41 @@
                 <Button Name="BtnSave"
                         Command="{Binding SaveFileCommand}"
                         ToolTip="Save the current label."
-                        Grid.Row="3" Grid.Column="1"
+                        Grid.Row="4" Grid.Column="1" Margin="5,5,5,5"
                         >
                     <Button.Content>
                         <WrapPanel>
                             <Image Name="ImgSaveProject2" Width="16" Height="16" />
-                    <TextBlock Margin="5,0,0,0">Save</TextBlock>
+                            <TextBlock Margin="5,0,0,0">Save</TextBlock>
                         </WrapPanel>
                     </Button.Content>
                 </Button>
-                <Button Name="BtnPrint"
-                        Command="{Binding PrintCommand}"
-                        ToolTip="Print the current label."
-                        Grid.Row="4" Grid.Column="1"
-                        >
-                    <Button.Content>
-                        <WrapPanel>
-                            <Image Name="ImgPrint" Width="16" Height="16" />
-                            <TextBlock Margin="5,0,0,0">Print</TextBlock>
-                        </WrapPanel>
-                    </Button.Content>
-                </Button>
+                <DockPanel Grid.Row="5" Grid.Column="1" >
+                    <ComboBox  DockPanel.Dock="Right"
+                               ItemsSource="{Binding NumberOfPrintCopies}"
+                               SelectedItem="{Binding SelectedNumberOfPrintCopies}"
+                               Width="50"
+                               Margin="5,10,10,10"
+                               >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+</ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Name="BtnPrint"
+                            Command="{Binding PrintCommand}"
+                            ToolTip="Print the current label."
+                            Margin="5,5,5,5"
+                            >
+                        <Button.Content>
+                            <WrapPanel>
+                                <Image Name="ImgPrint" Width="16" Height="16" />
+                                <TextBlock Margin="5,0,0,0">Print</TextBlock>
+                            </WrapPanel>
+                        </Button.Content>
+                    </Button>
+                </DockPanel>
             </Grid>
         </Grid>
 
