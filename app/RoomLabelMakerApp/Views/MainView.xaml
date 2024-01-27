@@ -100,12 +100,13 @@
             <!-- Right panel -->
             <Grid Grid.Column="1" Grid.Row="1" Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25*"/>
-                    <RowDefinition Height="73*"/>
-                    <RowDefinition Height="148*"/>
-                    <RowDefinition Height="49*"/>
-                    <RowDefinition Height="49*"/>
-                    <RowDefinition Height="49*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="14*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -113,8 +114,8 @@
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,147" Grid.RowSpan="3">
-                    <Label Content="_Room number:" FontSize="15" Margin="5,0,5,0"/>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Label Content="Room number:" FontSize="15" Margin="5,0,5,0"/>
                     <WrapPanel Height="20">
                         <ComboBox
                             ItemsSource="{Binding FontSizes}"
@@ -154,7 +155,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Grid.Column="1">
-                    <Label Content="_Members:" FontSize="15" Margin="5,5,5,0"/>
+                    <Label Content="Members:" FontSize="15" Margin="5,0,5,0"/>
                     <WrapPanel Height="20">
                         <ComboBox
                             ItemsSource="{Binding FontSizes}"

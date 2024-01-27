@@ -166,7 +166,7 @@ public class MainViewModel : INotifyPropertyChanged
 
     private void Print(object obj)
     {
-        DoorLabelModel.Print(_flowDocumentLabelPreview, SelectedNumberOfPrintCopies);
+        PrintHelper.Print(_flowDocumentLabelPreview, SelectedNumberOfPrintCopies);
     }
 
     private void CleanView()
@@ -259,9 +259,9 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
-    private void ToggleButtonClicked(object toggleButton)
+    private void ToggleButtonClicked(object button)
     {
-        if (toggleButton is not ToggleButton tb) return;
+        if (button is not Button tb) return;
         if (tb.Name.Contains("Number"))
         {
             if (tb.Name.Contains("Bold"))

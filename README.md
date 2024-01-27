@@ -1,6 +1,6 @@
 # RoomLabelMaker
 
-RoomLabelMaker is a C# WPF project created as part of a C# course at Jagiellonian University.
+RoomLabelMaker is an application developed in C# using WPF and MVVM architecture. It was created as part of a C# course at Jagiellonian University.
 
 ## Authors
 
@@ -13,9 +13,13 @@ RoomLabelMaker is a C# WPF project created as part of a C# course at Jagiellonia
 ## Features
 
 - Create, open and save projects
+
 - Font customization
+
 - Select and load logo image 
+
 - Print your desigend label
+
 - Real-time label previews
   
   ## Screenshots
