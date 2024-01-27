@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Media;
-using System.Windows;
 
 namespace RoomLabelMakerApp.Models;
 
@@ -11,16 +8,29 @@ public class TextObjectModel : ObjectBase, INotifyPropertyChanged
     private string _text;
     private string _fontFamily;
     private int _fontSize;
+    private bool _fontIsBold;
     private string _fontWeight;
+    private bool _fontIsItalic;
     private string _fontStyle;
 
-    public TextObjectModel(string text, string fontFamily, int fontSize, string fontWeight, string fontStyle) : base(0, 0, 0, 0)
+    public TextObjectModel() : base(0, 0, 0, 0)
+    {
+        _text = "";
+        _fontFamily = "";
+        _fontSize = 0;
+        _fontWeight = "";
+        _fontStyle = "";
+        FontIsBold = false;
+        FontIsItalic = false;
+    }
+
+    public TextObjectModel(string text, string fontFamily, int fontSize, bool fontIsBold, bool fontIsItalic) : base(0, 0, 0, 0)
     {
         _text = text;
         _fontFamily = fontFamily;
         _fontSize = fontSize;
-        _fontWeight = fontWeight;
-        _fontStyle = fontStyle;
+        FontIsBold = fontIsBold;
+        FontIsItalic = fontIsItalic;
     }
 
     public TextObjectModel(TextObjectModel other) : base(0, 0, 0, 0)
@@ -28,8 +38,8 @@ public class TextObjectModel : ObjectBase, INotifyPropertyChanged
         _text = other.Text;
         _fontFamily = other.FontFamily;
         _fontSize = other.FontSize;
-        _fontWeight = other.FontWeight;
-        _fontStyle = other.FontStyle;
+        FontIsBold = other.FontIsBold;
+        FontIsItalic = other.FontIsItalic;
     }
 
     public string Text
@@ -59,6 +69,16 @@ public class TextObjectModel : ObjectBase, INotifyPropertyChanged
             OnPropertyChanged(nameof(FontSize));
         }
     }
+    public bool FontIsBold
+    {
+        get => _fontIsBold;
+        set
+        {
+            _fontIsBold = value;
+            FontWeight = value ? "Bold" : "Normal";
+            OnPropertyChanged(nameof(FontIsBold));
+        }
+    }
     public string FontWeight
     {
         get => _fontWeight;
@@ -66,6 +86,16 @@ public class TextObjectModel : ObjectBase, INotifyPropertyChanged
         {
             _fontWeight = value;
             OnPropertyChanged(nameof(FontWeight));
+        }
+    }
+    public bool FontIsItalic
+    {
+        get => _fontIsItalic;
+        set
+        {
+            _fontIsItalic = value;
+            FontStyle = value ? "Italic" : "Normal";
+            OnPropertyChanged(nameof(FontIsItalic));
         }
     }
     public string FontStyle

@@ -9,6 +9,8 @@ using RoomLabelMakerApp.Utils;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System.Windows.Controls.Primitives;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace RoomLabelMakerApp.ViewModels;
 
 
@@ -36,14 +38,12 @@ public class MainViewModel : INotifyPropertyChanged
     private BitmapImage? _imageData;
     private DoorLabelModel _doorLabelModel;
     private FlowDocument _flowDocumentLabelPreview;
-    private readonly TextObjectModel _defaultRoomNumber = new ("[0000]", "Verdana", 60, "Bold", "Normal");
-    private readonly TextObjectModel _defaultRoomMembers = new("[name surname]\r\n[name surname]", "Verdana", 40, "Normal", "Normal");
+    private readonly TextObjectModel _defaultRoomNumber = new ("[0000]", "Verdana", 60, true, false);
+    private readonly TextObjectModel _defaultRoomMembers = new("[name surname]\r\n[name surname]", "Verdana", 40, false, false);
 
     public MainViewModel()
     {
-        _roomNumber = new TextObjectModel(_defaultRoomNumber);
-        _roomMembers = new TextObjectModel(_defaultRoomMembers);
-        _imageData = ImageObjectModel.UrlToBitmap(PathHelper.GetAssetPath(@"\UJ-logos\logo_basic.png"));
+        CleanView();
         _doorLabelModel = new DoorLabelModel();
         _flowDocumentLabelPreview = CreateFlowDocument();
 
@@ -158,7 +158,7 @@ public class MainViewModel : INotifyPropertyChanged
     {
         RoomNumber = new TextObjectModel(_defaultRoomNumber);
         RoomMembers = new TextObjectModel(_defaultRoomMembers);
-        ImageData = new BitmapImage();
+        ImageData = ImageObjectModel.UrlToBitmap(PathHelper.GetAssetPath(@"\UJ-logos\logo_basic.png"));
     }
 
 
